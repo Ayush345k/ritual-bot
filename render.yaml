@@ -1,0 +1,15 @@
+# Render Blueprint configuration for one-click deployment
+services:
+  - type: web
+    name: ritual-onboarding-hub
+    runtime: static
+    buildCommand: npm run build
+    publishPath: dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - src: /*
+        dest: /index.html
+        status: 200
